@@ -36,3 +36,54 @@ for i in range(500, 600):
     df = pd.DataFrame(data_dict, index=[0])
     data = pd.concat([data, df], ignore_index=True)
     print(i)
+
+data.to_csv(r"C:\Users\shuva\Downloads\films1.csv", index=0)
+
+# Let's say df contains your data in the format you mentioned earlier
+data = pd.read_csv(r"C:\Users\shuva\OneDrive\Desktop\films1.csv")
+
+relationships = []
+
+# Iterate through each row in the DataFrame
+for _, row in data.iterrows():
+    film = row['Film']
+    actor = row['Actor']
+    director = row['Director']
+    screenwriter = row['Screenwriter']
+
+    # Create relationships
+    relationships.append((film, actor, 'ACTED_IN'))
+    relationships.append((film, director, 'DIRECTED'))
+    relationships.append((film, screenwriter, 'WRITTEN_BY'))
+
+# Display relationships
+for relationship in relationships:
+    print(relationship)
+
+
+from neo4j import GraphDatabase
+# Connect to the Neo4j database
+uri = "bolt://localhost:7687"  # Replace with your Neo4j server URI
+user = "neo4j"  # Replace with your Neo4j username
+password = "wIeMFbVDn0n4lJRnABhWIv9NmUa7sE4WuJGXPk9pAHk"  # Replace with your Neo4j password
+
+# Create a Neo4j driver instance
+driver = GraphDatabase.driver(uri, auth=(user, password))
+
+# Assuming you have the 'relationships' list from the previous code snippet
+
+def create_relationships(tx, film, person, relationship):
+    # Cypher query to create relationships between films and people
+    query = (
+        "MERGE (f:Film {title: $film}) "
+        "MERGE (p:Person {name: $person}) "
+        "MERGE (p)-[:%s]->(f)" % relationship
+    )
+    tx.run(query, film=film, person=person)
+
+# Iterate through relationships and import them to Neo4j
+with driver.session() as session:
+    for relationship in relationships:
+        film, person, rel_type = relationship
+        session.write_transaction(create_relationships, film, person, rel_type)
+
