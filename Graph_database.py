@@ -7,7 +7,7 @@ from kinopoisk_unofficial.request.staff.staff_request import StaffRequest # Peop
 # empty dataframe to keep all the records
 data = pd.DataFrame(columns=['Film', 'Actor', 'Director', 'Screenwriter'])
 
-for i in range(500, 600):
+for i in range(500, 800):
     api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499") # my tocken
     film_request = FilmRequest(i) # create a query for the film name using film id
     staff_request = StaffRequest(i) # create a query for the film staff using film id
