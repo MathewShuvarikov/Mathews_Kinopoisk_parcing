@@ -37,12 +37,10 @@ for i in range(500, 600):
     data = pd.concat([data, df], ignore_index=True)
     print(i)
 
-data[['Film', 'Actor']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\actors.csv", index=0)
-data[['Film', 'Director']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\directors.csv", index=0)
-data[['Film', 'Screenwriter']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\screenwriters.csv", index=0)
+# data[['Film', 'Actor']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\actors.csv", index=0)
+# data[['Film', 'Director']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\directors.csv", index=0)
+# data[['Film', 'Screenwriter']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\screenwriters.csv", index=0)
 
-# Let's say df contains your data in the format you mentioned earlier
-data = pd.read_csv(r"C:\Users\shuva\OneDrive\Desktop\films1.csv")
 
 relationships = []
 
@@ -61,10 +59,6 @@ for _, row in data.iterrows():
 # Display relationships
 for relationship in relationships:
     print(relationship)
-
-
-# Сохранение DataFrame в CSV файл
-df.to_csv(r"C:\Users\shuva\OneDrive\Desktop\films2.csv", index=False, encoding='utf-8')
 
 
 from neo4j import GraphDatabase
