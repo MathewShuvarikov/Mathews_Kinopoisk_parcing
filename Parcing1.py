@@ -6,8 +6,8 @@ from kinopoisk_unofficial.client.exception.not_found import NotFound
 # Create an empty DataFrame
 df = pd.DataFrame(columns=['Film_name', 'Genre', 'Poster_URL', 'Description'])
 
-## я успел вытащить с 300 по 1400
-for i in range(1400, 1700):
+## я успел вытащить с 300 по 2000
+for i in range(1400, 2000):
     try:
         api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499")
         request = FilmRequest(i)
@@ -27,22 +27,3 @@ data = pd.read_csv(r"C:\Users\shuva\OneDrive\Desktop\2023-24\ВКР\Movies\movie
 data = pd.concat([data, df])
 data.to_csv(r"C:\Users\shuva\OneDrive\Desktop\2023-24\ВКР\Movies\movies_list.csv", index=0)
 
-
-from kinopoisk_unofficial.request.staff.staff_request import StaffRequest
-api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499")
-request = StaffRequest(507)
-response = api_client.staff.send_staff_request(request)
-
-
-from kinopoisk_unofficial.kinopoisk_api_client import KinopoiskApiClient
-from kinopoisk_unofficial.request.persons.person_by_name_request import PersonByNameRequest
-api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499")
-request = PersonByNameRequest("Джеймс Кэмерон")
-response = api_client.persons.send_person_by_name_request(request)
-
-
-from kinopoisk_unofficial.kinopoisk_api_client import KinopoiskApiClient
-from kinopoisk_unofficial.request.staff.person_request import PersonRequest
-api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499")
-request = PersonRequest(27977)
-response = api_client.staff.send_person_request(request)
