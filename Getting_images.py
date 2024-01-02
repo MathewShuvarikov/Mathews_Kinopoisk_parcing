@@ -3,6 +3,8 @@ import os
 import pandas as pd
 # List of image URLs
 df = pd.read_csv(r"C:\Users\shuva\OneDrive\Desktop\2023-24\ВКР\Movies\movies_list.csv")
+df = df.dropna()
+df = df.drop_duplicates()
 image_urls = df.Poster_URL.values
 
 # Folder to save the downloaded images
