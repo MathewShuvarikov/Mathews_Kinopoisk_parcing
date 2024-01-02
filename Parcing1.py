@@ -6,8 +6,8 @@ from kinopoisk_unofficial.client.exception.not_found import NotFound
 # Create an empty DataFrame
 df = pd.DataFrame(columns=['Film_name', 'Genre', 'Poster_URL', 'Description'])
 
-## я успел вытащить с 300 по 1224
-for i in range(1226, 1400):
+## я успел вытащить с 300 по 1400
+for i in range(1400, 1700):
     try:
         api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499")
         request = FilmRequest(i)
