@@ -7,7 +7,7 @@ from kinopoisk_unofficial.request.staff.staff_request import StaffRequest # Peop
 # empty dataframe to keep all the records
 data = pd.DataFrame(columns=['Film', 'Actor', 'Director', 'Screenwriter'])
 
-for i in range(500, 800):
+for i in range(500, 1200):
     api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499") # my tocken
     film_request = FilmRequest(i) # create a query for the film name using film id
     staff_request = StaffRequest(i) # create a query for the film staff using film id
@@ -37,6 +37,7 @@ for i in range(500, 800):
     data = pd.concat([data, df], ignore_index=True)
     print(i)
 
+data.to_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv", index=0)
 # data[['Film', 'Actor']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\actors.csv", index=0)
 # data[['Film', 'Director']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\directors.csv", index=0)
 # data[['Film', 'Screenwriter']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\screenwriters.csv", index=0)
