@@ -7,8 +7,10 @@ from kinopoisk_unofficial.request.staff.staff_request import StaffRequest # Peop
 # empty dataframe to keep all the records
 data = pd.DataFrame(columns=['Film', 'Actor', 'Director', 'Screenwriter'])
 
-for i in range(500, 1200):
-    api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499") # my tocken
+for i in range(350, 800):
+    ## 62b2be73-aae3-4751-a556-742d02d31d96 2nd api
+    ## c6d5218b-d822-4f5f-850f-4b74b69d0499 1st api
+    api_client = KinopoiskApiClient("62b2be73-aae3-4751-a556-742d02d31d96") # my tocken
     film_request = FilmRequest(i) # create a query for the film name using film id
     staff_request = StaffRequest(i) # create a query for the film staff using film id
     film_response = api_client.films.send_film_request(film_request)
@@ -37,12 +39,16 @@ for i in range(500, 1200):
     data = pd.concat([data, df], ignore_index=True)
     print(i)
 
-data.to_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv", index=0)
+df1 = pd.read_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv")
+df1 = pd.concat([df1,data])
+df1 = df1.dropna()
+df1 = df1.drop_duplicates()
+df1.to_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv", index=0)
 # data[['Film', 'Actor']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\actors.csv", index=0)
 # data[['Film', 'Director']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\directors.csv", index=0)
 # data[['Film', 'Screenwriter']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\screenwriters.csv", index=0)
 
-
+data = pd.read_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv")
 relationships = []
 
 # Iterate through each row in the DataFrame
