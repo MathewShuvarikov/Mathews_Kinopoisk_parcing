@@ -71,13 +71,12 @@ for relationship in relationships:
 from neo4j import GraphDatabase
 # Connect to the Neo4j database
 # 9bf936d8.databases.neo4j.io:7687
-uri = "neo4j+s://9bf936d8.databases.neo4j.io:7687"  # Replace with your Neo4j server URI
-user = "neo4j"  # Replace with your Neo4j username
-password = "wIeMFbVDn0n4lJRnABhWIv9NmUa7sE4WuJGXPk9pAHk"  # Replace with your Neo4j password
+uri = "neo4j+s://9bf936d8.databases.neo4j.io:7687"  # server URI
+user = "neo4j"  # Neo4j username
+password = "wIeMFbVDn0n4lJRnABhWIv9NmUa7sE4WuJGXPk9pAHk"  # Neo4j password
 
 # Create a Neo4j driver instance
 driver = GraphDatabase.driver(uri, auth=(user, password))
-# Assuming you have the 'relationships' list from the previous code snippet
 
 def create_relationships(tx, film, person, relationship):
     # Cypher query to create relationships between films and people
