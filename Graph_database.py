@@ -49,6 +49,8 @@ df1.to_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv", index=0)
 # data[['Film', 'Screenwriter']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\screenwriters.csv", index=0)
 
 data = pd.read_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv")
+data = data.drop_duplicates()
+data = data.dropna()
 relationships = []
 
 # Iterate through each row in the DataFrame
