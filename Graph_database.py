@@ -8,11 +8,11 @@ from kinopoisk_unofficial.client.exception.not_found import NotFound
 # empty dataframe to keep all the records
 data = pd.DataFrame(columns=['Film', 'Actor', 'Director', 'Screenwriter'])
 
-for i in range(900, 901):
+for i in range(1084, 1200):
     try:
     ## 62b2be73-aae3-4751-a556-742d02d31d96 2nd api
     ## c6d5218b-d822-4f5f-850f-4b74b69d0499 1st api
-        api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499") # my tocken
+        api_client = KinopoiskApiClient("62b2be73-aae3-4751-a556-742d02d31d96") # my tocken
         film_request = FilmRequest(i) # create a query for the film name using film id
         staff_request = StaffRequest(i) # create a query for the film staff using film id
         film_response = api_client.films.send_film_request(film_request)
