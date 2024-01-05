@@ -8,7 +8,7 @@ from kinopoisk_unofficial.client.exception.not_found import NotFound
 # empty dataframe to keep all the records
 data = pd.DataFrame(columns=['Film', 'Actor', 'Director', 'Screenwriter'])
 
-for i in range(700, 900):
+for i in range(900, 901):
     try:
     ## 62b2be73-aae3-4751-a556-742d02d31d96 2nd api
     ## c6d5218b-d822-4f5f-850f-4b74b69d0499 1st api
