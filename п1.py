@@ -11,11 +11,11 @@ from kinopoisk_unofficial.client.exception.not_found import NotFound
 # здесь будут храниться связи между фильмом, персоной и ролью персоны в создании фильма
 relationships = []
 
-for i in range(300, 310):
+for i in range(300, 500):
     try:
     ## 62b2be73-aae3-4751-a556-742d02d31d96 2nd api
     ## c6d5218b-d822-4f5f-850f-4b74b69d0499 1st api
-        api_client = KinopoiskApiClient("62b2be73-aae3-4751-a556-742d02d31d96") # мой токен
+        api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499") # мой токен
         film_request = FilmRequest(i) # запрос на название фильма с использованием film id
         staff_request = StaffRequest(i) # запрос на персон фильма с использованием film id
         film_response = api_client.films.send_film_request(film_request)
@@ -39,7 +39,7 @@ for i in range(300, 310):
         for name in names:
             # Создаем отношения, исключая пустые имена
             if name:
-                relationships.append((film_response.film.name_ru, profession, name))
+                relationships.append((film_response.film.name_ru, name, profession))
 
 
 from neo4j import GraphDatabase
@@ -57,9 +57,10 @@ def create_relationships(tx, film, person, relationship):
     query = (
         "MERGE (f:Film {title: $film}) "
         "MERGE (p:Person {name: $person}) "
-        "MERGE (p)-[:%s]->(f)" % relationship
+        "MERGE (p)-[r:RELATIONSHIP]->(f) "
+        "SET r.type = $relationship"
     )
-    tx.run(query, film=film, person=person)
+    tx.run(query, film=film, person=person, relationship=relationship)
 
 # Iterate through relationships and import them to Neo4j
 with driver.session() as session:
