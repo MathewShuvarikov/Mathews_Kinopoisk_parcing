@@ -10,12 +10,12 @@ from kinopoisk_unofficial.client.exception.not_found import NotFound
 # здесь будут храниться связи между фильмом, персоной и ролью персоны в создании фильма
 relationships = []
 
-for i in range(300, 500):
+for i in range(300, 307):
     try:
     ## 62b2be73-aae3-4751-a556-742d02d31d96 # my 2nd api
     ## c6d5218b-d822-4f5f-850f-4b74b69d0499 # my 1st api
     ## существует ограничение на число запросов по api, 500 в день
-        api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499") # мой токен
+        api_client = KinopoiskApiClient("62b2be73-aae3-4751-a556-742d02d31d96") # мой токен
         film_request = FilmRequest(i) # запрос на название фильма с использованием film id
         staff_request = StaffRequest(i) # запрос на персон фильма с использованием film id
         film_response = api_client.films.send_film_request(film_request)
@@ -73,8 +73,9 @@ def create_relationships(tx, film, person, relationship):
 # Проходим по связям и записываем их на сервер Neo4j
 with driver.session() as session:
     for relationship in relationships:
-        film, person, rel_type = relationship
+        film, person, rel_type = eval(str(relationship))
         session.write_transaction(create_relationships, film, person, rel_type)
+        print(f'{relationship} successfully downloaded')
 
 session.close()
 driver.close()
