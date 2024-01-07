@@ -1,5 +1,6 @@
 # Библиотеки
 # Версия neo4j: 5.16.0
+# Версия kinopoisk_unofficial: 2.2.2
 # Версия Python: 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)]
 from kinopoisk_unofficial.kinopoisk_api_client import KinopoiskApiClient # connection with API
 from kinopoisk_unofficial.request.films.film_request import FilmRequest # film name
