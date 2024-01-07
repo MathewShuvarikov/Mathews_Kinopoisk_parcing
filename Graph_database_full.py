@@ -14,6 +14,7 @@ for i in range(300, 500):
     try:
     ## 62b2be73-aae3-4751-a556-742d02d31d96 # my 2nd api
     ## c6d5218b-d822-4f5f-850f-4b74b69d0499 # my 1st api
+    ## существует ограничение на число запросов по api, 500 в день
         api_client = KinopoiskApiClient("c6d5218b-d822-4f5f-850f-4b74b69d0499") # мой токен
         film_request = FilmRequest(i) # запрос на название фильма с использованием film id
         staff_request = StaffRequest(i) # запрос на персон фильма с использованием film id
