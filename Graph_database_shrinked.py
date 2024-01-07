@@ -96,6 +96,7 @@ with driver.session() as session:
     for relationship in relationships:
         film, person, rel_type = relationship
         session.write_transaction(create_relationships, film, person, rel_type)
+        print(f'{relationship} successfully downloaded')
 
 session.close()
 driver.close()
