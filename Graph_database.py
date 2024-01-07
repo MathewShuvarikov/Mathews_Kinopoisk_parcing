@@ -1,20 +1,24 @@
-# libraries
+# Библиотеки
+# Версия Pandas: 2.1.4
+# Версия neo4j: 5.16.0
+# Версия Python: 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)]
 import pandas as pd
 from kinopoisk_unofficial.kinopoisk_api_client import KinopoiskApiClient # connection with API
 from kinopoisk_unofficial.request.films.film_request import FilmRequest # film name
 from kinopoisk_unofficial.request.staff.staff_request import StaffRequest # People from film
 from kinopoisk_unofficial.client.exception.not_found import NotFound
 
-# empty dataframe to keep all the records
+# датафрейм для хранения результатов запроса
+# будем использовать только наименование фильма, режиссера, первого актера и первого сценариста из списка
 data = pd.DataFrame(columns=['Film', 'Actor', 'Director', 'Screenwriter'])
 
-for i in range(1084, 1200):
+for i in range(1195, 1200):
     try:
     ## 62b2be73-aae3-4751-a556-742d02d31d96 2nd api
     ## c6d5218b-d822-4f5f-850f-4b74b69d0499 1st api
-        api_client = KinopoiskApiClient("62b2be73-aae3-4751-a556-742d02d31d96") # my tocken
-        film_request = FilmRequest(i) # create a query for the film name using film id
-        staff_request = StaffRequest(i) # create a query for the film staff using film id
+        api_client = KinopoiskApiClient("62b2be73-aae3-4751-a556-742d02d31d96") # мой токен
+        film_request = FilmRequest(i) # запрос на название фильма с использованием film id
+        staff_request = StaffRequest(i) # запрос на персон фильма с использованием film id
         film_response = api_client.films.send_film_request(film_request)
         staff_response = api_client.staff.send_staff_request(staff_request)
 
@@ -23,13 +27,14 @@ for i in range(1084, 1200):
             profession = staff.profession_text
             if profession not in staff_by_profession:
                 staff_by_profession[profession] = staff.name_ru
+        print(f"Film with ID {i} found")
     except NotFound:
         print(f"Film with ID {i} not found. Skipping...")
 
-    # Create a dictionary to hold data for the DataFrame
+    # Создаем словарь куда будем складывать информацию по фильмам
     data_dict = {'Film': film_response.film.name_ru}
 
-    # Assign values to respective columns based on profession
+    # Достаем только Актера, Режиссера и Сценариста
     for profession, name_ru in staff_by_profession.items():
         if profession == 'Актеры':
             data_dict['Actor'] = name_ru
@@ -38,19 +43,15 @@ for i in range(1084, 1200):
         elif profession == 'Сценаристы':
             data_dict['Screenwriter'] = name_ru
 
-    # Convert dictionary to DataFrame
-    df = pd.DataFrame(data_dict, index=[0])
-    data = pd.concat([data, df], ignore_index=True)
-    print(i)
+    # Складываем все в датафрейм
+    data = pd.concat([data, pd.DataFrame(data_dict, index=[0])], ignore_index=True)
 
 df1 = pd.read_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv")
 df1 = pd.concat([df1,data])
 df1 = df1.dropna()
 df1 = df1.drop_duplicates()
 df1.to_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv", index=0)
-# data[['Film', 'Actor']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\actors.csv", index=0)
-# data[['Film', 'Director']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\directors.csv", index=0)
-# data[['Film', 'Screenwriter']].to_csv(r"C:\Users\shuva\OneDrive\Desktop\screenwriters.csv", index=0)
+
 
 data = pd.read_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv")
 data = data.drop_duplicates()
