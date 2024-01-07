@@ -59,35 +59,31 @@ data = data.drop_duplicates()
 data = data.dropna()
 relationships = []
 
-# Iterate through each row in the DataFrame
+# Проходимся по каждой строке в датафрейме
 for _, row in data.iterrows():
     film = row['Film']
     actor = row['Actor']
     director = row['Director']
     screenwriter = row['Screenwriter']
 
-    # Create relationships
+    #Создаем связи
     relationships.append((film, actor, 'ACTED_IN'))
     relationships.append((film, director, 'DIRECTED'))
     relationships.append((film, screenwriter, 'WRITTEN_BY'))
 
-# Display relationships
-for relationship in relationships:
-    print(relationship)
-
 
 from neo4j import GraphDatabase
-# Connect to the Neo4j database
+# Задаем параметры для подключения к Neo4j
 # 9bf936d8.databases.neo4j.io:7687
 uri = "neo4j+s://9bf936d8.databases.neo4j.io:7687"  # server URI
 user = "neo4j"  # Neo4j username
 password = "wIeMFbVDn0n4lJRnABhWIv9NmUa7sE4WuJGXPk9pAHk"  # Neo4j password
 
-# Create a Neo4j driver instance
+# Подключаемся к Neo4j
 driver = GraphDatabase.driver(uri, auth=(user, password))
 
 def create_relationships(tx, film, person, relationship):
-    # Cypher query to create relationships between films and people
+    # Cypher-запрос на создание связей между людьми и фильмами
     query = (
         "MERGE (f:Film {title: $film}) "
         "MERGE (p:Person {name: $person}) "
@@ -95,7 +91,7 @@ def create_relationships(tx, film, person, relationship):
     )
     tx.run(query, film=film, person=person)
 
-# Iterate through relationships and import them to Neo4j
+# Проходим по связям и записываем их на сервер Neo4j
 with driver.session() as session:
     for relationship in relationships:
         film, person, rel_type = relationship
