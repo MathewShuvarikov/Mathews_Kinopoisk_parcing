@@ -13,7 +13,7 @@ from kinopoisk_unofficial.client.exception.not_found import NotFound
 # будем использовать только наименование фильма, режиссера, первого актера и первого сценариста из списка
 data = pd.DataFrame(columns=['Film', 'Actor', 'Director', 'Screenwriter'])
 
-for i in range(1195, 1200):
+for i in range(1195, 1200):# перебираем айдишники фильмов на Кинопоиске
     try:
     ## 62b2be73-aae3-4751-a556-742d02d31d96 2nd api
     ## c6d5218b-d822-4f5f-850f-4b74b69d0499 1st api

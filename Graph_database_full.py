@@ -10,7 +10,7 @@ from kinopoisk_unofficial.client.exception.not_found import NotFound
 # здесь будут храниться связи между фильмом, персоной и ролью персоны в создании фильма
 relationships = []
 
-for i in range(300, 500):
+for i in range(300, 500): # перебираем айдишники фильмов на Кинопоиске
     try:
     ## 62b2be73-aae3-4751-a556-742d02d31d96 # my 2nd api
     ## c6d5218b-d822-4f5f-850f-4b74b69d0499 # my 1st api
