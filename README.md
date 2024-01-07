@@ -13,3 +13,4 @@
 <ul style="list-style-type: disc; text-align: center;">
     <li><strong><a href="https://github.com/MathewShuvarikov/Mathews_Kinopoisk_parcing/blob/master/Graph_database_full.py">Graph_database_full.py</a></strong> Here you find code for creating database with full relations (actors, directors, producers, etc.).</li>
     <li><strong><a href="https://github.com/MathewShuvarikov/Mathews_Kinopoisk_parcing/blob/master/Graph_database_shriked.py">Graph_database_shriked.py</a></strong>Here you find code for creating database with partial relations (actors, directors, screenwriters only).</li>
+    <li><strong><a href="https://github.com/MathewShuvarikov/Mathews_Kinopoisk_parcing/blob/master/films_info.csv">films_info.csv</a></strong>Here you find data collected using <a href="https://github.com/MathewShuvarikov/Mathews_Kinopoisk_parcing/blob/master/Graph_database_shriked.py">Graph_database_shriked.py</a>.</li>
