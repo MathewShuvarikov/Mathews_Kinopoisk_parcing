@@ -41,6 +41,14 @@ for i in range(300, 500):
             if name:
                 relationships.append((film_response.film.name_ru, name, profession))
 
+# сохраним связи в файл
+with open('relationships.txt', 'w') as file:
+    for relationship in relationships:
+        file.write(f"{relationship}\n")
+# прочитаем связи из файла
+with open('relationships.txt', 'r') as file:
+    relationships = [line.strip() for line in file.readlines()]
+
 
 from neo4j import GraphDatabase
 # Задаем параметры для подключения к Neo4j
