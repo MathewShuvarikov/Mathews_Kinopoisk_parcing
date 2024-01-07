@@ -1,7 +1,7 @@
 <p></p>
 <hr/>
 <h1 style="text-align: center">Hello, dear colleagues!</h1>
-<p style="font-size: 18px; text-align: center">My name is Matvey Shuvarikov. I'm a Junior Data Scientist, and this is my repo with examples of my code for creating Neo4j database using Python and Kinopoinsk parsing library.
+<p style="font-size: 18px; text-align: center">My name is Matvey Shuvarikov. I'm a Junior Data Scientist, and this is my repo with examples of my code for creating Neo4j graph database with movies using Python and Kinopoinsk parsing library.
 </p>
 <hr/>
 <h3>Languages used in the repo</h3>
