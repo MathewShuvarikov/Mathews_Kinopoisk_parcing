@@ -48,16 +48,15 @@ for i in range(1195, 1200):
     # Складываем все в датафрейм
     data = pd.concat([data, pd.DataFrame(data_dict, index=[0])], ignore_index=True)
 
-df1 = pd.read_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv")
-df1 = pd.concat([df1,data])
-df1 = df1.dropna()
-df1 = df1.drop_duplicates()
-df1.to_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv", index=0)
+# запишем данные в файлик
+data.to_csv(r"films_info.csv", index=0)
 
-
-data = pd.read_csv(r"C:\Users\shuva\OneDrive\Desktop\films_info.csv")
+# прочитаем файд, уберем дубликаты и пропуски
+data = pd.read_csv(r"films_info.csv")
 data = data.drop_duplicates()
 data = data.dropna()
+
+# здесь будут храниться связи между фильмом, персоной и ролью персоны в создании фильма
 relationships = []
 
 # Проходимся по каждой строке в датафрейме
