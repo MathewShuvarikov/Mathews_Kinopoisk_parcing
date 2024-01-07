@@ -6,7 +6,7 @@
 <hr/>
 <h3>Languages used in the repo</h3>
 <div class="image-container">
-    <img src="https://lamcdn.net/lookatme.ru/post-og_image/PZWCGcd7HqaHizrqp_pg5A.jpg" width="80" height="55"/>
+    <img src="https://lamcdn.net/lookatme.ru/post-og_image/PZWCGcd7HqaHizrqp_pg5A.jpg" width="100" height="80"/>
 </div>
 <hr/>
 <p style="font-size: 18px; text-align: center">In this repo you may find:</p>
